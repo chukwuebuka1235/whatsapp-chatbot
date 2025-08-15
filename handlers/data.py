@@ -125,11 +125,35 @@ def confirm_data(phone_number, recharge_number, provider, plan_title, plan_descr
     }
 
 def data_completed(phone_number, recharge_number, provider, plan_title):
+
+    text = (
+        f"✅ Data Purchase Successful!\n\n"
+        f"Your {plan_title} has been activated for {recharge_number} on {provider}.\n"
+        f"Enjoy your data!"
+    )
+
     return {
-        "type": "text",
-        "text": {
-            "body": f"✅ Data Purchase Successful!\n\n"
-                    f"Your {plan_title} has been activated for {recharge_number} on {provider}.\n"
-                    f"Enjoy your data!"
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": text
+            },
+            "action": {
+                "button": "📋 Menu Options",
+                "sections": [
+                    {
+                        "title": "Available Actions",
+                        "rows": [
+                            {"id": "check_balance", "title": "💰 Check Balance"},
+                            {"id": "transfer_money", "title": "💸 Transfer Money"},
+                            {"id": "buy_airtime", "title": "📱 Buy Airtime"},
+                            {"id": "buy_data", "title": "🌐 Buy Data"},
+                            {"id": "pay_bills", "title": "💳 Pay Bills"},
+                            {"id": "transaction_history", "title": "⏲ Transaction History"}
+                        ]
+                    }
+                ]
+            }
         }
     }

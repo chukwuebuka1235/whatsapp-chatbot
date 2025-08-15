@@ -139,7 +139,7 @@ def process_message(data):
                                 state["provider"],
                                 state["amount"]
                             )
-                            send_whatsapp_message(phone_number, response["text"]["body"])
+                            send_whatsapp_interactive(phone_number, response)
                             del user_airtime_state[phone_number]
                         else:
                             send_whatsapp_message(phone_number, "❌ Purchase cancelled. Type 'CONFIRM' to complete the airtime purchase.")
@@ -230,7 +230,7 @@ def process_message(data):
                                 state["bank"],
                                 state["account_number"]
                             )
-                            send_whatsapp_message(phone_number, response["text"]["body"])
+                            send_whatsapp_interactive(phone_number, response)
                             del user_transfer_state[phone_number]
                         else:
                             send_whatsapp_message(phone_number, "❌ Transfer cancelled. Type 'CONFIRM' to complete the transfer.")
@@ -338,7 +338,7 @@ def process_message(data):
                                 state["provider"],
                                 state["plan_title"]
                             )
-                            send_whatsapp_message(phone_number, response["text"]["body"])
+                            send_whatsapp_interactive(phone_number, response)
                             del user_data_state[phone_number]
                         else:
                             send_whatsapp_message(phone_number, "❌ Purchase cancelled. Type 'CONFIRM' to complete the data purchase.")
@@ -426,7 +426,7 @@ def process_message(data):
                                 state["meter_number"],
                                 state["amount"]
                             )
-                            send_whatsapp_message(phone_number, response["text"]["body"])
+                            send_whatsapp_interactive(phone_number, response)
                             del user_electricity_state[phone_number]
                         else:
                             send_whatsapp_message(phone_number, "❌ Payment cancelled. Type 'CONFIRM' to complete the payment.")
@@ -499,7 +499,7 @@ def process_message(data):
                                 state["package"],
                                 state["smartcard_number"]
                             )
-                            send_whatsapp_message(phone_number, response["text"]["body"])
+                            send_whatsapp_interactive(phone_number, response)
                             del user_cable_state[phone_number]
                         else:
                             send_whatsapp_message(phone_number, "❌ Payment cancelled. Type 'CONFIRM' to complete the payment.")
@@ -571,7 +571,7 @@ def process_message(data):
                                 state["package"],
                                 state["beneficiary_phone"]
                             )
-                            send_whatsapp_message(phone_number, response["text"]["body"])
+                            send_whatsapp_interactive(phone_number, response)
                             del user_education_state[phone_number]
                         else:
                             send_whatsapp_message(phone_number, "❌ Payment cancelled. Type 'CONFIRM' to complete the payment.")
@@ -620,7 +620,7 @@ def process_message(data):
                                 state["platform"],
                                 state["customer_id"]
                             )
-                            send_whatsapp_message(phone_number, response["text"]["body"])
+                            send_whatsapp_interactive(phone_number, response)
                             del user_betting_state[phone_number]
                         else:
                             send_whatsapp_message(phone_number, "❌ Payment cancelled. Type 'CONFIRM' to complete the payment.")

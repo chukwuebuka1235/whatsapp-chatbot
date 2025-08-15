@@ -14,10 +14,29 @@ def handle_transaction_history(phone_number, profile_name):
         if t['recipient']:
             history_text += f"👤 To: {t['recipient']}\n"
         history_text += f"✅ {t['status']}\n\n"
-    
+
     return {
-        "type": "text",
-        "text": {
-            "body": history_text
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": { 
+                "text": history_text
+            },
+            "action": {
+                "button": "📋 Menu Options",
+                "sections": [
+                    {
+                        "title": "Available Actions",
+                        "rows": [
+                            {"id": "check_balance", "title": "💰 Check Balance"},
+                            {"id": "transfer_money", "title": "💸 Transfer Money"},
+                            {"id": "buy_airtime", "title": "📱 Buy Airtime"},
+                            {"id": "buy_data", "title": "🌐 Buy Data"},
+                            {"id": "pay_bills", "title": "💳 Pay Bills"},
+                            {"id": "transaction_history", "title": "⏲ Transaction History"}
+                        ]
+                    }
+                ]
+            }
         }
     }

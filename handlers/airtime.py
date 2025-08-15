@@ -61,10 +61,33 @@ def confirm_airtime(phone_number, recharge_number, provider, amount):
     }
 
 def airtime_completed(phone_number, recharge_number, provider, amount):
+    text = (
+        f"✅ Airtime Purchase Successful!\n\n"
+        f"₦{float(amount):,.2f} airtime has been sent to {recharge_number} on {provider}.\n"
+    )
+
     return {
-        "type": "text",
-        "text": {
-            "body": f"✅ Airtime Purchase Successful!\n\n"
-                    f"₦{float(amount):,.2f} airtime has been sent to {recharge_number} on {provider}.\n"
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": text
+            },
+            "action": {
+                "button": "📋 Menu Options",
+                "sections": [
+                    {
+                        "title": "Available Actions",
+                        "rows": [
+                            {"id": "check_balance", "title": "💰 Check Balance"},
+                            {"id": "transfer_money", "title": "💸 Transfer Money"},
+                            {"id": "buy_airtime", "title": "📱 Buy Airtime"},
+                            {"id": "buy_data", "title": "🌐 Buy Data"},
+                            {"id": "pay_bills", "title": "💳 Pay Bills"},
+                            {"id": "transaction_history", "title": "⏲ Transaction History"}
+                        ]
+                    }
+                ]
+            }
         }
     }

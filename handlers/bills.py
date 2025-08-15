@@ -118,11 +118,33 @@ def confirm_electricity_payment(phone_number, provider, payment_type, meter_numb
     }
 
 def electricity_payment_completed(phone_number, provider, meter_number, amount):
+    text = (
+        f"✅ Electricity Payment Successful!\n\n"
+        f"₦{float(amount):,.2f} has been paid for meter {meter_number} ({provider})."
+    )
     return {
-        "type": "text",
-        "text": {
-            "body": f"✅ Electricity Payment Successful!\n\n"
-                    f"₦{float(amount):,.2f} has been paid for meter {meter_number} ({provider})."
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": text
+            },
+            "action": {
+                "button": "📋 Menu Options",
+                "sections": [
+                    {
+                        "title": "Available Actions",
+                        "rows": [
+                            {"id": "check_balance", "title": "💰 Check Balance"},
+                            {"id": "transfer_money", "title": "💸 Transfer Money"},
+                            {"id": "buy_airtime", "title": "📱 Buy Airtime"},
+                            {"id": "buy_data", "title": "🌐 Buy Data"},
+                            {"id": "pay_bills", "title": "💳 Pay Bills"},
+                            {"id": "transaction_history", "title": "⏲ Transaction History"}
+                        ]
+                    }
+                ]
+            }
         }
     }
 
@@ -214,11 +236,34 @@ def confirm_cable_payment(phone_number, provider, package, smartcard_number):
     }
 
 def cable_payment_completed(phone_number, provider, package, smartcard_number):
+    text = (
+        f"✅ Cable TV Payment Successful!\n\n"
+        f"Your {package} package has been activated for smartcard {smartcard_number} ({provider})."
+    )
+
     return {
-        "type": "text",
-        "text": {
-            "body": f"✅ Cable TV Payment Successful!\n\n"
-                    f"Your {package} package has been activated for smartcard {smartcard_number} ({provider})."
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": text
+            },
+            "action": {
+                "button": "📋 Menu Options",
+                "sections": [
+                    {
+                        "title": "Available Actions",
+                        "rows": [
+                            {"id": "check_balance", "title": "💰 Check Balance"},
+                            {"id": "transfer_money", "title": "💸 Transfer Money"},
+                            {"id": "buy_airtime", "title": "📱 Buy Airtime"},
+                            {"id": "buy_data", "title": "🌐 Buy Data"},
+                            {"id": "pay_bills", "title": "💳 Pay Bills"},
+                            {"id": "transaction_history", "title": "⏲ Transaction History"}
+                        ]
+                    }
+                ]
+            }
         }
     }
 
@@ -302,11 +347,34 @@ def confirm_education_payment(phone_number, biller, package, beneficiary_phone):
     }
 
 def education_payment_completed(phone_number, biller, package, beneficiary_phone):
+    text = (
+        f"✅ Education Payment Successful!\n\n"
+        f"Your {package} has been sent to {beneficiary_phone}."
+    )
+
     return {
-        "type": "text",
-        "text": {
-            "body": f"✅ Education Payment Successful!\n\n"
-                    f"Your {package} has been sent to {beneficiary_phone}."
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": text
+            },
+            "action": {
+                "button": "📋 Menu Options",
+                "sections": [
+                    {
+                        "title": "Available Actions",
+                        "rows": [
+                            {"id": "check_balance", "title": "💰 Check Balance"},
+                            {"id": "transfer_money", "title": "💸 Transfer Money"},
+                            {"id": "buy_airtime", "title": "📱 Buy Airtime"},
+                            {"id": "buy_data", "title": "🌐 Buy Data"},
+                            {"id": "pay_bills", "title": "💳 Pay Bills"},
+                            {"id": "transaction_history", "title": "⏲ Transaction History"}
+                        ]
+                    }
+                ]
+            }
         }
     }
 
@@ -361,10 +429,33 @@ def confirm_betting_payment(phone_number, platform, customer_id):
     }
 
 def betting_payment_completed(phone_number, platform, customer_id):
+    text = (
+        f"✅ Betting Payment Successful!\n\n"
+        f"Your payment has been processed for customer ID {customer_id} on {platform}."
+    )
+
     return {
-        "type": "text",
-        "text": {
-            "body": f"✅ Betting Payment Successful!\n\n"
-                    f"Your payment has been processed for customer ID {customer_id} on {platform}."
+        "type": "interactive",
+        "interactive": {
+            "type": "list",
+            "body": {
+                "text": text
+            },
+            "action": {
+                "button": "📋 Menu Options",
+                "sections": [
+                    {
+                        "title": "Available Actions",
+                        "rows": [
+                            {"id": "check_balance", "title": "💰 Check Balance"},
+                            {"id": "transfer_money", "title": "💸 Transfer Money"},
+                            {"id": "buy_airtime", "title": "📱 Buy Airtime"},
+                            {"id": "buy_data", "title": "🌐 Buy Data"},
+                            {"id": "pay_bills", "title": "💳 Pay Bills"},
+                            {"id": "transaction_history", "title": "⏲ Transaction History"}
+                        ]
+                    }
+                ]
+            }
         }
     }
