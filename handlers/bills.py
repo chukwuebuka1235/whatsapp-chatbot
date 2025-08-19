@@ -15,7 +15,7 @@ def handle_pay_bills(phone_number, profile_name):
                 "text": "💳 Pay Bills"
             },
             "body": {
-                "text": "Select the type of bill you want to pay:"
+                "text": "Select the type of bill you want to pay:   \n\nType 'CANCEL' to end this process"
             },
             "action": {
                 "button": "Bill Types",

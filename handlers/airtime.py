@@ -5,7 +5,7 @@ def ask_airtime_phone_number(phone_number):
     return {
         "type": "text",
         "text": {
-            "body": "📱 *Buy Airtime*\n\nPlease enter the phone number you want to recharge:\nExample: _08012345678_"
+            "body": "📱 *Buy Airtime*\n\nPlease enter the phone number you want to recharge:\nExample: _08012345678_   \n\nType 'CANCEL' to end this process"
         }
     }
 

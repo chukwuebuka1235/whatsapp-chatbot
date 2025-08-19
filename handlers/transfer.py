@@ -6,7 +6,7 @@ def ask_transfer_amount(phone_number):
     return {
         "type": "text",
         "text": {
-            "body": "💸 *Transfer Money*\n\nPlease enter the amount you want to transfer (in Naira):\nExample: _5000_"
+            "body": "💸 *Transfer Money*\n\nPlease enter the amount you want to transfer (in Naira):\nExample: _5000_   \n\nType 'CANCEL' to end this process"
         }
     }
 

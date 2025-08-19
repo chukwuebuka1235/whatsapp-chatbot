@@ -5,7 +5,7 @@ def ask_data_phone_number(phone_number):
     return {
         "type": "text",
         "text": {
-            "body": "📱 *Buy Data*\n\nPlease enter your phone number:\nExample: _08012345678_"
+            "body": "📱 *Buy Data*\n\nPlease enter your phone number:\nExample: _08012345678_   \n\nType 'CANCEL' to end this process"
         }
     }
 
