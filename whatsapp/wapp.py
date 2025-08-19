@@ -7,53 +7,34 @@ from database import save_user_data, check_user_exists
 from messages.welcomemsg import welcome_message
 from handlers import handle_menu_selection
 from config import env_variables
-
+from state_manager import (
+    user_transfer_state, user_airtime_state, user_data_state,
+    user_bill_state, user_electricity_state, user_cable_state,
+    user_education_state, user_betting_state, active_states,
+)
 from handlers.transfer import (
-    ask_transfer_amount, 
-    ask_select_bank,
-    ask_account_number,
-    ask_remarks,
-    confirm_transfer,
-    transfer_completed
+    ask_transfer_amount,ask_select_bank,ask_account_number,
+    ask_remarks,confirm_transfer,transfer_completed
 )
 from handlers.airtime import (
-    ask_airtime_phone_number,
-    ask_airtime_provider,
-    ask_airtime_amount,
-    confirm_airtime,
-    airtime_completed
+    ask_airtime_phone_number,ask_airtime_provider,
+    ask_airtime_amount,confirm_airtime,airtime_completed
 )
 from handlers.data import (
-    ask_data_phone_number,
-    ask_data_provider,
-    ask_data_duration,
-    ask_data_plan,
-    confirm_data,
-    data_completed
+    ask_data_phone_number,ask_data_provider,ask_data_duration,
+    ask_data_plan,confirm_data,data_completed
 )
 from handlers.bills import (
-    handle_pay_bills,
-    ask_electricity_provider,
-    ask_payment_type,
-    ask_meter_number,
-    ask_electricity_amount,
-    confirm_electricity_payment,
-    electricity_payment_completed,
-    ask_cable_provider,
-    ask_cable_package,
-    ask_smartcard_number,
-    confirm_cable_payment,
-    cable_payment_completed,
-    ask_education_biller,
-    ask_waec_package,
-    ask_beneficiary_phone,
-    confirm_education_payment,
-    education_payment_completed,
-    ask_betting_platform,
-    ask_customer_id,
-    confirm_betting_payment,
-    betting_payment_completed
+    handle_pay_bills,ask_electricity_provider,ask_payment_type,
+    ask_meter_number,ask_electricity_amount,confirm_electricity_payment,
+    electricity_payment_completed,ask_cable_provider,ask_cable_package,
+    ask_smartcard_number,confirm_cable_payment,cable_payment_completed,
+    ask_education_biller,ask_waec_package,ask_beneficiary_phone,
+    confirm_education_payment,education_payment_completed,
+    ask_betting_platform,ask_customer_id,confirm_betting_payment,betting_payment_completed
 )
+
+from whatsapp_api import send_whatsapp_message, send_whatsapp_interactive, send_whatsapp_template
 
 app = Flask(__name__)
 config = env_variables()
@@ -829,105 +810,6 @@ def process_message(data):
         print("❌ Error processing message:", e)
         return make_response("Error", 500)
 
-def send_whatsapp_template(to, user_name):
-    url = f"https://graph.facebook.com/v18.0/{config['PHONE_NUMBER_ID']}/messages"
-    headers = {
-        "Authorization": f"Bearer {config['ACCESS_TOKEN']}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "recipient_type": "individual",
-        "messaging_product": "whatsapp",
-        "to": to,
-        "type": "interactive",
-        "interactive": {
-            "type": "flow",
-            "header": {
-                "type": "text",
-                "text": "KadickMoni 2.0"
-            },
-            "body": {
-                "text": f"""Hello {user_name}, welcome to Kadick Integrated Limited 🎉
-
-We offer a wide range of services:
-• Airtime and data recharge
-• Bill payments
-• Transfer and receive money into your virtual account
-• Secure card withdrawal transactions
-
-We're here to make your financial transactions fast, easy, and reliable. """
-            },
-            "footer": {
-                "text": " Powered by Kadick Integrated Limited"
-            },
-            "action": {
-                "name": "flow",
-                "parameters": {
-                    "flow_message_version": "3",
-                    "flow_name": "Message templates_MARKETING_cef565b2-4",
-                    "flow_cta": "Get Started",
-                }
-            }
-        }
-    }
-    response = requests.post(url, json=payload, headers=headers)
-    print("\n📤 WhatsApp API Response:", response.json())
-    return response.json()
-
-def send_whatsapp_message(phone_number, text):
-    url = f"https://graph.facebook.com/v18.0/{config['PHONE_NUMBER_ID']}/messages"
-    headers = {
-        "Authorization": f"Bearer {config['ACCESS_TOKEN']}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "messaging_product": "whatsapp",
-        "to": phone_number,
-        "type": "text",
-        "text": {"body": text}
-    }
-    response = requests.post(url, json=payload, headers=headers)
-    print(f"📤 WhatsApp message status: {response.status_code} | {response.text}")
-
-def send_whatsapp_interactive(phone_number, interactive_payload):
-    url = f"https://graph.facebook.com/v18.0/{config['PHONE_NUMBER_ID']}/messages"
-    headers = {
-        "Authorization": f"Bearer {config['ACCESS_TOKEN']}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "messaging_product": "whatsapp",
-        "to": phone_number,
-        **interactive_payload  # Unpack the interactive structure
-    }
-    response = requests.post(url, json=payload, headers=headers)
-    print(f"📤 WhatsApp interactive message status: {response.status_code} | {response.text}")
-
 @app.route("/test")
 def test():
     return "Test endpoint is working!", 200
-
-# State dictionaries
-user_transfer_state = {}
-user_airtime_state = {}
-user_data_state = {}
-user_bill_state = {}
-user_electricity_state = {}
-user_cable_state = {}
-user_education_state = {}
-user_betting_state = {}
-
-# List of all active states for easy checking
-active_states = [
-    user_transfer_state,
-    user_airtime_state,
-    user_data_state,
-    user_bill_state,
-    user_electricity_state,
-    user_cable_state,
-    user_education_state,
-    user_betting_state
-]
-
-def handle_buy_data(phone_number, profile_name):
-    return ask_data_phone_number(phone_number)
